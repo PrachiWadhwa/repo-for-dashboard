@@ -2,15 +2,15 @@ account_id = 4438259
 api_key    = "NRAK-VRXRZURE3KIF089GIFYW7GSSJGV"
 region     = "EU"
 
-  name             = "my New Relic Terraform Example1"
-  permissions      = "public_read_only"
-  dashboard        = " my New Relic Terraform Example1"
- 
+  
      
 
-widget_dashboard = {
-  widget1 ={
-
+dashboard = {
+ ist ={
+  dashboard_name = "value"
+  permissions      = "public_read_only"
+ page_name       = " my New Relic Terraform Example1"
+ 
   billboard_title  = "duration billboard of synthetic check"
   billboard_row    = 1
   billboard_column = 1

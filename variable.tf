@@ -10,19 +10,12 @@ variable "region" {
   type = string
 
 }
-variable "dashboard" {        
-    type = string
-    
-}
-variable "permissions"{
-type      = string
-}
-variable "name" {
-  type =  string
-}
-variable "widget_dashboard" {
+
+variable "dashboard" {
   type = map(object({
- 
+    permissions  =string
+    page_name     =string
+    dashboard_name= string
     billboard_title  = string
     billboard_row    = number
     billboard_column = number

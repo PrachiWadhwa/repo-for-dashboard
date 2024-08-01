@@ -1,11 +1,11 @@
 resource "newrelic_one_dashboard" "exampledash" {
  
-  name        = var.name
-  permissions = var.permissions
-  for_each = var.widget_dashboard
+  name        = each.value.dashboard_name
+  permissions = each.value.permissions
+  for_each = var.dashboard
  
   page {
-    name = var.dashboard
+    name = each.value.page_name
 
     widget_billboard {
       title  = each.value.billboard_title
