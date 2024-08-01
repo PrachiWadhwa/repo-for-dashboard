@@ -1,129 +1,198 @@
 resource "newrelic_one_dashboard" "exampledash" {
-  name        = "New Relic Terraform Example1"
-  permissions = "public_read_only"
-
+ 
+  name        = var.name
+  permissions = var.permissions
+  for_each = var.widget_dashboard
+ 
   page {
-    name = "New Relic Terraform Example1"
+    name = var.dashboard
 
     widget_billboard {
-      title  = "duration billboard of synthetic check"
-      row    = 1
-      column = 1
-      width  = 6
-      height = 3
+      title  = each.value.billboard_title
+      row    = each.value.billboard_row
+      column = each.value.billboard_column
+      width  = each.value.billboard_width
+      height = each.value.billboard_height
 
       nrql_query {
-        query = "SELECT average(duration) FROM SyntheticCheck WHERE monitorName = 'firstpingmonitor'FACET location"
+        query = each.value.billboard_query  
+
+      }
+      
+    }
+     widget_billboard {
+      title  = each.value.billboard_title1
+      row    = each.value.billboard_row1
+      column = each.value.billboard_column1
+      width  = each.value.billboard_width1
+      height = each.value.billboard_height1
+
+      nrql_query {
+        query = each.value.billboard_query1 
+
       }
       
     }
        widget_billboard {
-      title  = "duration billboard of synthetic check"
-      row    = 1
-      column = 1
-      width  = 6
-      height = 3
+      title  = each.value.billboard_title2
+      row    = each.value.billboard_row2
+      column = each.value.billboard_column2
+      width  = each.value.billboard_width2
+      height = each.value.billboard_height2
 
       nrql_query {
-        query = "SELECT average(duration) FROM SyntheticCheck WHERE monitorName = 'firstpingmonitor'FACET location"
+        query = each.value.billboard_query2
+
       }
-       }
+      
+    }
+    
    
  
      widget_line {
-      title  = "line"
-      row    = 4
-      column = 7
-      width  = 6
-      height = 3
+      title  = each.value.line_title
+      row    = each.value.line_row
+      column = each.value.line_column
+      width  = each.value.line_width
+      height = each.value.line_height
 
       nrql_query {
-        account_id = 4438259
-        query = "SELECT count(*) from Transaction WHERE appName='mylink'  SINCE  7 day ago TIMESERIES"
+        account_id = var.account_id
+        query = each.value.line_query
 
       }
      }  
-      widget_line {
-      title  = "line"
-      row    = 4
-      column = 7
-      width  = 6
-      height = 3
+       widget_line {
+      title  = each.value.line_title1
+      row    = each.value.line_row1
+      column = each.value.line_column1
+      width  = each.value.line_width1
+      height = each.value.line_height1
 
       nrql_query {
-        account_id = 4438259
-        query = "SELECT count(*) from Transaction WHERE appName='mylink'  SINCE  7 day ago TIMESERIES"
+        account_id = var.account_id
+        query = each.value.line_query1
 
       }
-     }  
+     } 
+
+       widget_line {
+      title  = each.value.line_title2
+      row    = each.value.line_row2
+      column = each.value.line_column2
+      width  = each.value.line_width2
+      height = each.value.line_height2
+
+      nrql_query {
+        account_id = var.account_id
+        query = each.value.line_query2
+
+      }
+     } 
+     
     
       widget_bar {
-      title  = "bar widget"
-      row    = 1
-      column = 7
-      width  = 6
-      height = 3
+      title  = each.value.bar_title
+      row    = each.value.bar_row
+      column = each.value.bar_column
+      width  = each.value.bar_width
+      height = each.value.bar_height
 
       nrql_query {
-        account_id = 4438259
-        query      = "SELECT count(*) FROM Transaction  since 7 days ago FACET  weekdayOf(timestamp)"
+        account_id =var.account_id
+        query      = each.value.bar_query
 
       }
   }
       widget_bar {
-      title  = "bar widget"
-      row    = 1
-      column = 7
-      width  = 6
-      height = 3
+      title  = each.value.bar_title1
+      row    = each.value.bar_row1
+      column = each.value.bar_column1
+      width  = each.value.bar_width1
+      height = each.value.bar_height1
 
       nrql_query {
-        account_id = 4438259
-        query      = "SELECT count(*) FROM Transaction  since 7 days ago FACET  weekdayOf(timestamp)"
+        account_id =var.account_id
+        query      = each.value.bar_query1
 
       }
   }
-      widget_table {
-      title  = "Table"
-      row    = 13
-      column = 1
-      width  = 6
-      height = 3
+        widget_bar {
+      title  = each.value.bar_title2
+      row    = each.value.bar_row2
+      column = each.value.bar_column2
+      width  = each.value.bar_width2
+      height = each.value.bar_height2
+
+      nrql_query {
+        account_id =var.account_id
+        query      = each.value.bar_query2
+
+      }
+  }
+    widget_table {
+      title  = each.value.table_title
+      row    = each.value.table_row
+      column = each.value.table_column
+      width  = each.value.table_width
+      height = each.value.table_height
  
       nrql_query {
        
-        query   = "SELECT count(*), average(duration), max(duration), min(duration) FROM Transaction FACET name SINCE 7 day ago"
+        query   = each.value.table_query
       }
     }
-     widget_table {
-      title  = "Table"
-      row    = 13
-      column = 1
-      width  = 6
-      height = 3
+      widget_table {
+      title  = each.value.table_title1
+      row    = each.value.table_row1
+      column = each.value.table_column1
+      width  = each.value.table_width1
+      height = each.value.table_height1
  
       nrql_query {
        
-        query   = "SELECT count(*), average(duration), max(duration), min(duration) FROM Transaction FACET name SINCE 7 day ago"
+        query   = each.value.table_query1
       }
+    }
+ 
+      widget_table {
+      title  = each.value.table_title2
+      row    = each.value.table_row2
+      column = each.value.table_column2
+      width  = each.value.table_width2
+      height = each.value.table_height2
+ 
+      nrql_query {
+       
+        query   = each.value.table_query2
+      }
+    }
+     
+    
+       widget_markdown {
+      title  = each.value.markdown_text
+      row    = each.value.markdown_row
+      column = each.value.markdown_column
+      width  = each.value.markdown_width
+      height = each.value.markdown_height
+      text   = each.value.markdown_text
     }
       widget_markdown {
-      title  = "Dashboard Note"
-      row    = 7
-      column = 1
-      width  = 12
-      height = 3
-
-      text = "### Helpful Links\n\n* [New Relic One](https://one.newrelic.com)\n* [Developer Portal](https://developer.newrelic.com)"
+      title  = each.value.markdown_text1
+      row    = each.value.markdown_row1
+      column = each.value.markdown_column1
+      width  = each.value.markdown_width1
+      height = each.value.markdown_height1
+      text   = each.value.markdown_text1
     }
+     
        widget_markdown {
-      title  = "Dashboard Note"
-      row    = 7
-      column = 1
-      width  = 12
-      height = 3
-
-      text = "### Helpful Links\n\n* [New Relic One](https://one.newrelic.com)\n* [Developer Portal](https://developer.newrelic.com)"
+      title  = each.value.markdown_text2
+      row    = each.value.markdown_row2
+      column = each.value.markdown_column2
+      width  = each.value.markdown_width2
+      height = each.value.markdown_height2
+      text   = each.value.markdown_text2
     }
 }
 }
