@@ -12,7 +12,7 @@ variable "region" {
 }
 
 variable "dashboard" {
-  type = map(object({
+  type = list(object({
     permissions  =string
     page_name     =string
     dashboard_name= string

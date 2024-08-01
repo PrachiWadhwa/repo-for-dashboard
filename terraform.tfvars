@@ -5,8 +5,8 @@ region     = "EU"
   
      
 
-dashboard = {
- ist ={
+dashboard = [
+{
   dashboard_name = "value"
   permissions      = "public_read_only"
  page_name       = " my New Relic Terraform Example1"
@@ -119,6 +119,6 @@ dashboard = {
   markdown_text2     = "### Helpful Links\n\n* [New Relic One](https://one.newrelic.com)\n* [Developer Portal](https://developer.newrelic.com)"
 }
   
-  }
+]
 
 
