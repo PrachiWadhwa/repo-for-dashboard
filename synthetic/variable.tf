@@ -47,7 +47,7 @@ variable "script" {
     locations_public                        = list(string)
     period                                  = string
     enable_screenshot_on_failure_and_script = bool
-    script                                  = string
+    # script                                  = string
     script_language                         = string
 
 
